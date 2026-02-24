@@ -1,0 +1,439 @@
+<!doctype html>
+<html id="login">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ABD Hotspot | Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Cache-control" content="public" />
+    <meta http-equiv="pragma" content="public" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="author" content="FCE" />
+    <meta name="description" content="KnE internet hotspot status page." />
+    <link rel="shortcut icon" href="style/img/bg-abd.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body,
+      html {
+        margin: 0;
+        padding: 15px;
+        width: 100%;
+        min-height: 100svh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background: transparent;
+      }
+
+      .bg-image {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("style/img/bg-abd 1.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+
+      .bg-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at center,
+          rgba(8, 21, 37, 0.4) 0%,
+          rgba(8, 21, 37, 0.75) 70%,
+          rgba(8, 21, 37, 0.95) 100%
+        );
+      }
+
+      .content-container {
+        /* transform: translateY(-2vh); */
+        transform: none;
+        position: relative;
+        background: rgba(15, 30, 50, 0.6);
+        /* padding: clamp(20px, 4vw, 35px); */
+        padding: 24px 28px 26px;
+        border-radius: 20px;
+        text-align: center;
+        width: 370px;
+        max-width: 92vw;
+
+        backdrop-filter: blur(18px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+
+        box-shadow:
+          0 10px 40px rgba(0, 0, 0, 0.6),
+          0 0 60px rgba(0, 120, 255, 0.08);
+
+        animation: fadeIn 0.8s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(-2vh);
+        }
+      }
+
+      .logo-container {
+        margin-bottom: 12px;
+        margin-top: 0;
+        /* display: flex;
+      justify-content: center; */
+      }
+
+      .logo-container img {
+        max-width: 150px;
+        /* width: clamp(90px, 22vw, 130px); */
+        width: clamp(140px, 35vw, 220px);
+        height: auto;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+      }
+
+      .logo-container img:hover {
+        transform: scale(1.05);
+      }
+
+      .title-area {
+        margin-top: 0px;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+
+      .title-main {
+        font-size: 21px;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        color: #e8e4dc;
+        margin-bottom: 8px;
+      }
+
+      .title-sub {
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        color: rgba(255, 255, 255, 0.35);
+        margin-bottom: 28px;
+      }
+
+      .form-container {
+        width: 100%;
+      }
+
+      .input-container {
+        margin-bottom: 20px;
+      }
+
+      .input-container input {
+        display: block;
+      }
+
+      .loginForm {
+        width: 100%;
+        padding: 16px 18px;
+        margin-bottom: 12px;
+        border-radius: 14px;
+        /* font-size: clamp(13px, 3vw, 15px); */
+        font-size: 14px;
+
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.05);
+        color: #ffffff;
+
+        transition: all 0.3s ease;
+      }
+
+      .loginForm::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .loginForm:focus {
+        border-color: #ffffff;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+      }
+
+      #loginButton {
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        color: white;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 6px;
+        margin-bottom: 28px;
+        padding: 17px;
+        border-radius: 14px;
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      #loginButton:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+      }
+
+      #smallText a {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      #smallText a:hover {
+        color: #2980b9;
+        text-decoration: underline;
+      }
+
+      .by-text {
+        color: #ffffff;
+      }
+
+      #link a {
+        color: #3b82f6;
+      }
+
+      #link {
+        margin-top: 5px;
+      }
+
+      #link a {
+        color: #3498db;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      #link a:hover {
+        color: #2980b9;
+        text-decoration: underline;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 480px) {
+        .content-container {
+          padding: 25px 20px;
+          width: 95%;
+        }
+
+        .logo-container img {
+          max-width: 120px;
+        }
+
+        .loginForm {
+          padding: 10px 12px;
+          font-size: 15px;
+        }
+      }
+
+      @media (max-height: 600px) {
+        .content-container {
+          padding: 20px 15px;
+        }
+
+        .logo-container {
+          margin-bottom: 15px;
+        }
+
+        .logo-container img {
+          max-width: 100px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .content-container {
+          padding: 18px 14px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .content-container {
+          animation:
+            fadeIn 0.8s ease-out,
+            float 10s ease-in-out infinite;
+        }
+      }
+
+      /* POPUP IFRAME */
+      @media (max-width: 480px) {
+        #promoBox {
+          width: 100%;
+          height: 80vh;
+          max-height: 90vh;
+          border-radius: 12px;
+        }
+
+        #promoClose {
+          font-size: 13px;
+          padding: 6px 10px;
+        }
+
+        .content-container {
+          transform: translateY(-1vh);
+        }
+      }
+
+      #promoOverlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(6px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      #promoBox {
+        width: 90vw;
+        max-width: 400px;
+        aspect-ratio: 1 / 1;
+        background: #ffffff;
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        animation: fadeInPopup 0.4s ease;
+      }
+
+      .slider {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+      }
+
+      .slide.active {
+        opacity: 1;
+      }
+
+      @keyframes fadeInPopup {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      #promoClose {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        background: #e85415;
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: not-allowed;
+        font-size: 14px;
+        opacity: 0.6;
+        transition: all 0.3s ease;
+      }
+
+      #promoClose.enable {
+        cursor: pointer;
+        opacity: 1;
+      }
+
+      #promoClose:hover {
+        background: #c0392b;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- POPUP IKLAN 1:1 -->
+    <div id="promoOverlay">
+      <div id="promoBox">
+        <div class="slider">
+          <img src="style/img/Wobbler promo februari-16.jpg (1).jpeg" class="slide active" />
+          <img src="style/img/Wobbler promo februari-16.jpg (1).jpeg" class="slide" />
+          <img src="style/img/Wobbler promo februari-16.jpg (1).jpeg" class="slide" />
+        </div>
+      </div>
+    </div>
+    <div class="bg-image"></div>
+    <div class="content-container">
+      <div class="logo-container">
+        <img
+          src="style/img/ABD__kecil_.jpg-removebg-preview (1).png"
+          alt="ABD Logo"
+        />
+      </div>
+      <div class="title-area">
+        <div class="title-main">NETWORK ACCESS</div>
+        <div class="title-sub">HOTSPOT AUTHENTICATION</div>
+      </div>
+      <div class="form-container">
+        <form name="login" action="$(link-login-only)" method="post">
+          <div class="input-container">
+            <input
+              class="loginForm"
+              type="text"
+              name="username"
+              placeholder="Username"
+              required
+            />
+            <input
+              class="loginForm"
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <div class="button-container">
+            <input
+              class="loginForm"
+              id="loginButton"
+              type="submit"
+              value="LOGIN"
+            />
+          </div>
+        </form>
+      </div>
+      <div id="smallText">
+        <span class="by-text"> by </span>
+        <div id="link">
+          <a href="https://mjm-bali.co.id" target="_blank"
+            >IT Asian Bay Development</a
+          >
+        </div>
+      </div>
+      <script src="popup.js"></script>
+    </div>
+  </body>
+</html>

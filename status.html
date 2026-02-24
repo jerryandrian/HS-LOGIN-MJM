@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABD Hotspot | Status</title>
+    $(if refresh-timeout)
+    <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+    $(endif)
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="author" content="FCE">
+    <meta name="description" content="Uncle JO internet hotspot status page.">
+    <link rel="stylesheet" type="text/css" href="style/global.css" />
+    <link rel="stylesheet" type="text/css" href="style/status.css" />
+    <link rel="shortcut icon" href="style/img/1710675344-17-03-2024-iSZQk9yVubtJh31N46lxpnC7av5osrLW.png">
+   
+    <script>
+      var popup = '';
+      function focusAdvert() { if (window.focus) popup.focus(); }
+      function openAdvert() {
+         popup = open('$(link-advert)', 'hotspot_advert', '');
+         setTimeout(focusAdvert, 1000);
+      }
+      function openLogout() {
+         if (window.name != 'hotspot_status') return true;
+         open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubar=0,resizable=1,width=280,height=250');
+         window.close();
+         return false;
+      }
+      function readableBytes(pBytes) {
+         var s = ['bytes', 'KB', 'MB', 'GB', 'TB'];
+         var e = Math.floor(Math.log(pBytes)/Math.log(1024));
+         return (pBytes/Math.pow(1024, e)).toFixed(2) + s[e];
+      }
+    </script>
+    <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Poppins', sans-serif;
+      }
+      body, html {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("style/img/bg.jpg") center/cover no-repeat;
+      }
+      .content-container {
+          background: rgba(6, 6, 6, 0.85);
+          padding: 30px;
+          border-radius: 15px;
+          text-align: center;
+          width: 90%;
+          max-width: 360px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          backdrop-filter: blur(5px);
+      }
+      .content-container img {
+          max-width: 150px;
+          transition: transform 0.3s ease;
+      }
+      .content-container img:hover { transform: scale(1.05); }
+      .dialogButton {
+          background-color: #f70213;
+          color: black;
+          cursor: pointer;
+          padding: 12px;
+          border: none;
+          font-size: 16px;
+      }
+      .dialogButton:hover { background-color: #f70213; }
+    </style>
+</head>
+<body id="status">
+    <div class="content-container">
+        <div id="announce">
+            $(if login-by == 'trial')
+                Welcome trial user!
+            $(elif login-by != 'mac')
+                Welcome $(username)!
+            $(endif)
+        </div>
+        <form action="$(link-logout)" name="logout" onsubmit="return openLogout()">
+            <table class="dialog" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td align="right">Your IP address:</td>
+                    <td>$(ip)</td>
+                </tr>
+                <tr>
+                    <td align="right">Data used:</td>
+                    <td>
+                        <script>document.write(readableBytes($(bytes-in)+$(bytes-out)));</script>
+                        <noscript>$(bytes-in-nice) / $(bytes-out-nice)</noscript>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Data remaining:</td>
+                    $(if remain-bytes-total)
+                        <td>
+                            <script>document.write(readableBytes($(remain-bytes-total)));</script>
+                            <noscript><a href="$(link-orig)/userman">[Check balance]</a></noscript>
+                        </td>
+                    $(else)
+                        <td>Uncapped</td>
+                    $(endif)
+                </tr>
+                $(if session-time-left)
+                    <tr>
+                        <td align="right">Time used/remaining:</td>
+                        <td>$(uptime) / $(session-time-left)</td>
+                    </tr>
+                $(else)
+                    <tr>
+                        <td align="right">Connected:</td>
+                        <td>$(uptime)</td>
+                    </tr>
+                $(endif)
+                $(if blocked == 'yes')
+                    <tr>
+                        <td align="right">Status:</td>
+                        <td>
+                            <div style="color: white">
+                                <a href="$(link-advert)" target="hotspot_advert">advertisement</a> required
+                            </div>
+                        </td>
+                    </tr>
+                $(elif refresh-timeout-secs)
+                    <tr>
+                        <td id="statsRefresh" colspan="2" align="center">This page will auto-refresh in $(refresh-timeout-secs) seconds.</td>
+                    </tr>
+                $(endif)
+                $(if login-by-mac != 'yes')
+                    <tr>
+                        <td class="LogoutButton" colspan="2" align="center">
+                            <input class="dialogButton" type="submit" value="Logout">
+                        </td>
+                    </tr>
+                $(endif)
+            </table>
+        </form>
+    </div>
+</body>
+</html>

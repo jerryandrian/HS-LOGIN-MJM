@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+   <title>ABD Hotspot | Logged Out</title>
+
+   <meta charset="UTF-8">
+   <meta http-equiv="pragma" content="no-cache">
+   <meta http-equiv="expires" content="-1">
+   <meta name="author" content="FCE">
+   <meta name="description" content="Internet hotspot logout page.">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <link rel="stylesheet" type="text/css" href="style/global.css">
+   <link rel="stylesheet" type="text/css" href="style/status.css">
+   <link rel="shortcut icon" href="style/img/ABD1.png">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+   <style>
+      :root {
+         --primary-color: #4CAF50;
+         --primary-hover: #3e8e41;
+         --text-color: #ffffff;
+         --light-text: rgba(255, 255, 255, 0.6);
+         --white: #fff;
+         --card-bg: rgba(15, 30, 50, 0.75);
+         --shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+         --border: 1px solid rgba(255, 255, 255, 0.08);
+         --border-radius: 12px;
+         --padding-normal: 25px;
+         --padding-small: 15px;
+         --transition: all 0.3s ease;
+      }
+
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+         font-family: 'Poppins', sans-serif;
+      }
+
+      body,
+      html {
+         margin: 0;
+         padding: 0;
+         width: 100%;
+         height: 100%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+
+         background: radial-gradient(circle at top,
+               #12263a 0%,
+               #0b1c2d 40%,
+               #081525 100%);
+      }
+
+      .background {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         /* background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("style/img/bg.jpg"); */
+         background-position: center;
+         background-size: cover;
+         background-repeat: no-repeat;
+         z-index: -1;
+      }
+
+      .container {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         width: 90%;
+         max-width: 500px;
+         z-index: 1;
+      }
+
+      .page-title {
+         font-size: 24px;
+         font-weight: 600;
+         margin-bottom: 20px;
+         color: var(--white);
+         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+         text-align: center;
+      }
+
+      .card {
+         background-color: var(--card-bg);
+         border-radius: var(--border-radius);
+         padding: var(--padding-normal);
+         width: 100%;
+         box-shadow: var(--shadow);
+         backdrop-filter: blur(12px);
+         box-shadow:
+            0 10px 40px rgba(0, 0, 0, 0.6),
+            0 0 60px rgba(0, 120, 255, 0.08);
+         animation: fadeIn 0.6s ease-in-out;
+         border: var(--border);
+      }
+
+      @keyframes fadeIn {
+         from {
+            opacity: 0;
+            transform: translateY(-10px);
+         }
+
+         to {
+            opacity: 1;
+            transform: translateY(0);
+         }
+      }
+
+      .session-info {
+         display: grid;
+         grid-template-columns: 40% 60%;
+         gap: 10px;
+         margin-bottom: 15px;
+      }
+
+      .session-info__label {
+         font-weight: 500;
+         color: var(--light-text);
+         text-align: right;
+         padding: 5px 10px;
+      }
+
+      .session-info__value {
+         font-weight: 500;
+         color: var(--text-color);
+         padding: 5px 10px;
+      }
+
+      .highlight {
+         color: var(--primary-color);
+         font-weight: 600;
+      }
+
+      .card-footer {
+         margin-top: 20px;
+         text-align: center;
+         width: 100%;
+      }
+
+      .button {
+         background: linear-gradient(135deg, #2563eb, #1e40af);
+         color: white;
+         border: none;
+         padding: 14px 30px;
+         font-size: 16px;
+         border-radius: 10px;
+         cursor: pointer;
+         transition: 0.3s ease;
+         font-weight: 600;
+         width: 100%;
+         max-width: 250px;
+      }
+
+      .button:hover {
+         background-color: var(--primary-hover);
+         transform: translateY(-2px);
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .page-footer {
+         margin-top: 20px;
+         text-align: center;
+         color: var(--white);
+         font-size: 14px;
+      }
+
+      .page-footer a {
+         color: var(--white);
+         text-decoration: none;
+         transition: color 0.3s ease;
+      }
+
+      .page-footer a:hover {
+         color: var(--primary-color);
+      }
+
+      /* Responsive adjustments */
+      @media screen and (max-width: 576px) {
+         .card {
+            padding: 20px 15px;
+         }
+
+         .session-info {
+            grid-template-columns: 1fr;
+         }
+
+         .session-info__label {
+            text-align: left;
+            padding-bottom: 0;
+         }
+
+         .session-info__value {
+            padding-top: 0;
+         }
+
+         .page-title {
+            font-size: 20px;
+         }
+      }
+   </style>
+</head>
+
+<body>
+   <div class="background"></div>
+
+   <div class="container">
+      <h1 class="page-title">Anda telah berhasil keluar</h1>
+
+      <div class="card">
+         <div class="session-info">
+            <div class="session-info__label">Username:</div>
+            <div class="session-info__value highlight">$(username)</div>
+         </div>
+
+         <div class="session-info">
+            <div class="session-info__label">Durasi Sesi:</div>
+            <div class="session-info__value">$(uptime)</div>
+         </div>
+
+         <div class="session-info">
+            <div class="session-info__label">Total Data Terpakai:</div>
+            <div class="session-info__value" id="total-data">
+               <noscript>$(bytes-in-nice) / $(bytes-out-nice)</noscript>
+            </div>
+         </div>
+
+         <div class="session-info">
+            <div class="session-info__label">Sisa Data:</div>
+            <div class="session-info__value" id="remain-data">
+               $(if remain-bytes-total)
+               <span class="highlight">
+                  <noscript><a href="$(link-orig)/userman">[Cek Saldo]</a></noscript>
+               </span>
+               $(else)
+               Unlimited
+               $(endif)
+            </div>
+         </div>
+
+         $(if session-time-left)
+         <div class="session-info">
+            <div class="session-info__label">Sisa Waktu:</div>
+            <div class="session-info__value highlight">$(session-time-left)</div>
+         </div>
+         $(endif)
+
+         <div class="card-footer">
+            <form action="$(link-login)" name="login" onSubmit="return openLogin()">
+               <button type="submit" class="button">Login Kembali</button>
+            </form>
+         </div>
+      </div>
+
+      <footer class="page-footer">
+         <!-- &copy; 2025 MJM Hotspot -->
+         &copy; <span id="year"></span> ABD Hotspot
+
+         <script>
+            document.getElementById("year").textContent = new Date().getFullYear();
+         </script>
+
+
+      </footer>
+   </div>
+
+   <script>
+      function openLogin() {
+         if (window.name != 'hotspot_logout') return true;
+         open('$(link-login)', '_blank', '');
+         window.close();
+         return false;
+      }
+
+      function readableBytes(pBytes) {
+         var s = ['bytes', 'KB', 'MB', 'GB', 'TB'];
+         var e = Math.floor(Math.log(pBytes) / Math.log(1024));
+         return (pBytes / Math.pow(1024, Math.floor(e))).toFixed(2) + " " + s[e];
+      }
+
+      // Populate data elements
+      document.addEventListener('DOMContentLoaded', function () {
+         document.getElementById('total-data').textContent = readableBytes($(bytes -in) + $(bytes - out));
+
+         var remainData = document.getElementById('remain-data');
+         if ($(remain - bytes - total)) {
+            remainData.textContent = readableBytes($(remain - bytes - total));
+         }
+      });
+   </script>
+</body>
+
+</html>
