@@ -1,22 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-  // SLIDER
-  const slides = document.querySelectorAll(".slide");
-  let current = 0;
-
-  function showNextSlide() {
-    slides[current].classList.remove("active");
-    current = (current + 1) % slides.length;
-    slides[current].classList.add("active");
+  if (isMobile) {
+    document.getElementById("promoOverlay").style.display = "none";
+    return;
   }
 
-  setInterval(showNextSlide, 3000);
-
-  // AUTO CLOSE 5 DETIK
   const overlay = document.getElementById("promoOverlay");
+  overlay.style.pointerEvents = "none";
 
-  setTimeout(() => {
-    overlay.style.display = "none";
+  // Auto slide
+  const slides = document.querySelectorAll(".slide");
+  let currentSlide = 0;
+
+  setInterval(function () {
+    slides[currentSlide].classList.remove("active");
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add("active");
+  }, 5000);
+
+  // Auto close setelah 10 detik
+  setTimeout(function () {
+    overlay.style.transition = "opacity 0.6s ease";
+    overlay.style.opacity = "0";
+    setTimeout(function () {
+      overlay.style.display = "none";
+    }, 600);
   }, 10000);
-
 });

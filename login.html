@@ -28,14 +28,13 @@
       body,
       html {
         margin: 0;
-        padding: 15px;
+        padding: 0;
         width: 100%;
-        min-height: 100svh;
-
+        height: 100%;
+        overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
-
         background: transparent;
       }
 
@@ -74,14 +73,11 @@
         text-align: center;
         width: 370px;
         max-width: 92vw;
-
         backdrop-filter: blur(18px);
         border: 1px solid rgba(255, 255, 255, 0.08);
-
         box-shadow:
           0 10px 40px rgba(0, 0, 0, 0.6),
           0 0 60px rgba(0, 120, 255, 0.08);
-
         animation: fadeIn 0.8s ease;
       }
 
@@ -90,7 +86,6 @@
           opacity: 0;
           transform: translateY(-30px);
         }
-
         to {
           opacity: 1;
           transform: translateY(-2vh);
@@ -99,14 +94,11 @@
 
       .logo-container {
         margin-bottom: 12px;
-        margin-top: 0;
-        /* display: flex;
-      justify-content: center; */
+        margin-top: 0; /* display: flex; justify-content: center; */
       }
 
       .logo-container img {
-        max-width: 150px;
-        /* width: clamp(90px, 22vw, 130px); */
+        max-width: 150px; /* width: clamp(90px, 22vw, 130px); */
         width: clamp(140px, 35vw, 220px);
         height: auto;
         object-fit: contain;
@@ -154,14 +146,11 @@
         width: 100%;
         padding: 16px 18px;
         margin-bottom: 12px;
-        border-radius: 14px;
-        /* font-size: clamp(13px, 3vw, 15px); */
+        border-radius: 14px; /* font-size: clamp(13px, 3vw, 15px); */
         font-size: 14px;
-
         border: 1px solid rgba(255, 255, 255, 0.08);
         background: rgba(255, 255, 255, 0.05);
         color: #ffffff;
-
         transition: all 0.3s ease;
       }
 
@@ -232,6 +221,7 @@
       }
 
       /* Responsive adjustments */
+
       @media (max-width: 480px) {
         .content-container {
           padding: 25px 20px;
@@ -277,6 +267,7 @@
       }
 
       /* POPUP IFRAME */
+
       @media (max-width: 480px) {
         #promoBox {
           width: 100%;
@@ -285,14 +276,20 @@
           border-radius: 12px;
         }
 
-        #promoClose {
-          font-size: 13px;
-          padding: 6px 10px;
+        @media (max-width: 768px) {
+          #promoOverlay {
+            display: none !important;
+          }
         }
+      }
 
-        .content-container {
-          transform: translateY(-1vh);
-        }
+      #promoClose {
+        font-size: 13px;
+        padding: 6px 10px;
+      }
+
+      .content-container {
+        transform: translateY(-1vh);
       }
 
       #promoOverlay {
@@ -341,7 +338,6 @@
           opacity: 0;
           transform: scale(0.9);
         }
-
         to {
           opacity: 1;
           transform: scale(1);
@@ -371,69 +367,284 @@
       #promoClose:hover {
         background: #c0392b;
       }
+
+      /* ================= SPLIT SCREEN ================= */
+
+      .split-container {
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      /* LEFT SIDE */
+
+      .left-side {
+        width: 32%;
+        min-width: 380px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #0f1e32;
+      }
+
+      /* RIGHT SIDE */
+
+      .right-side {
+        position: relative;
+        width: 68%;
+        height: 100vh;
+        overflow: hidden;
+        flex: 1;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        padding-left: 80px;
+      }
+
+      /* VIDEO */
+
+      .hero-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        transition: opacity 0.8s ease-in-out;
+      }
+
+      /* FADE EFFECT */
+
+      #videoFade {
+        position: absolute;
+        inset: 0;
+        background: black;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 2;
+        transition: opacity 0.6s ease;
+      }
+
+      /* DARK OVERLAY */
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 3;
+      }
+
+      /* Overlay elegan */
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to right,
+          rgba(8, 21, 37, 0.9) 0%,
+          rgba(8, 21, 37, 0.4) 50%,
+          rgba(8, 21, 37, 0.1) 100%
+        );
+      }
+
+      /* TEXT */
+      .hero-text {
+        position: absolute;
+        left: 60px;
+        bottom: 90px;
+        z-index: 4;
+        color: white;
+        max-width: 600px;
+      }
+
+      .hero-text span {
+        color: #c9a227;
+        letter-spacing: 5px;
+        font-size: 13px;
+        font-weight: 500;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 12px;
+      }
+
+      .hero-text h1 {
+        font-size: 52px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        line-height: 1.1;
+        letter-spacing: -0.5px;
+      }
+
+      .hero-text p {
+        color: #d1d5db;
+        font-size: 14px;
+      }
+
+      /* RESPONSIVE */
+
+      @media (max-width: 900px) {
+        .left-side {
+          width: 100%;
+          min-width: unset;
+          height: 100vh;
+        }
+
+        .right-side {
+          display: none;
+        }
+      }
+
+      #videoAdOverlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.4);
+          backdrop-filter: blur(10px);
+          display: none;
+          justify-content: center;
+          align-items: center;
+          z-index: 20000;
+        }
+
+      #videoAdBox {
+        width: 75vw;
+        height: calc(75vw * 16 / 9);
+        max-width: 320px;
+        max-height: calc(320px * 16 / 9);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        flex-shrink: 0;
+      }
+
+      #videoAd {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 18px;
+      }
+
+      #videoAdOverlay.active {
+        display: flex;
+      }
+
+      /* Class Aktif */
+
+      #videoAdOverlay.active {
+        display: flex;
+      }
     </style>
   </head>
-
   <body>
     <!-- POPUP IKLAN 1:1 -->
     <div id="promoOverlay">
       <div id="promoBox">
         <div class="slider">
-          <img src="style/img/Wobbler promo februari-16.jpg (1).jpeg" class="slide active" />
-          <img src="style/img/Wobbler promo februari-16.jpg (1).jpeg" class="slide" />
-          <img src="style/img/Wobbler promo februari-16.jpg (1).jpeg" class="slide" />
+          <img
+            src="style/img/Wobbler promo februari-16.jpg (1).jpeg"
+            class="slide active"
+          />
+          <img
+            src="style/img/Wobbler promo februari-16.jpg (1).jpeg"
+            class="slide"
+          />
         </div>
       </div>
     </div>
-    <div class="bg-image"></div>
-    <div class="content-container">
-      <div class="logo-container">
-        <img
-          src="style/img/ABD__kecil_.jpg-removebg-preview (1).png"
-          alt="ABD Logo"
-        />
+
+    <!-- POP UP VIDEO MOBILE -->
+
+    <div id="videoAdOverlay">
+      <div id="videoAdBox">
+        <video id="videoAd" autoplay muted playsinline>
+          <source src="style/img/video/video-promosi.mp4" type="video/mp4" />
+        </video>
       </div>
-      <div class="title-area">
-        <div class="title-main">NETWORK ACCESS</div>
-        <div class="title-sub">HOTSPOT AUTHENTICATION</div>
-      </div>
-      <div class="form-container">
-        <form name="login" action="$(link-login-only)" method="post">
-          <div class="input-container">
-            <input
-              class="loginForm"
-              type="text"
-              name="username"
-              placeholder="Username"
-              required
-            />
-            <input
-              class="loginForm"
-              type="password"
-              name="password"
-              placeholder="Password"
-              required
+    </div>
+
+    <div class="split-container">
+      <!-- LEFT SIDE -->
+
+      <div class="left-side">
+        <div class="content-container">
+          <div class="logo-container">
+            <img
+              src="style/img/ABD__kecil_.jpg-removebg-preview (1).png"
+              alt="ABD Logo"
             />
           </div>
-          <div class="button-container">
-            <input
-              class="loginForm"
-              id="loginButton"
-              type="submit"
-              value="LOGIN"
-            />
+          <div class="title-area">
+            <div class="title-main">NETWORK ACCESS</div>
+            <div class="title-sub">HOTSPOT AUTHENTICATION</div>
           </div>
-        </form>
-      </div>
-      <div id="smallText">
-        <span class="by-text"> by </span>
-        <div id="link">
-          <a href="https://mjm-bali.co.id" target="_blank"
-            >IT Asian Bay Development</a
-          >
+          <div class="form-container">
+            <form name="login" action="$(link-login-only)" method="post">
+              <div class="input-container">
+                <input
+                  class="loginForm"
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  required
+                />
+                <input
+                  class="loginForm"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+
+              <div class="button-container">
+                <input
+                  class="loginForm"
+                  id="loginButton"
+                  type="submit"
+                  value="LOGIN"
+                />
+              </div>
+            </form>
+          </div>
+
+          <div class="login-footer">
+            <span class="by-text"> by </span>
+            <div id="link">
+              <a href="https://portal.asianbay.co.id/" target="_blank"
+                >IT Asian Bay Development</a
+              >
+            </div>
+          </div>
         </div>
       </div>
-      <script src="popup.js"></script>
+
+      <!-- RIGHT SIDE -->
+      <div class="right-side">
+        <video
+          id="bgvideo"
+          class="hero-video"
+          autoplay
+          muted
+          playsinline
+          preload="auto"
+        >
+          <source src="style/img/video/video-promosi.mp4" />
+        </video>
+
+        <div id="videoFade"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-text">
+          <span id="greeting"></span>
+          <h1>Welcome Back.</h1>
+          <p id="date-location"></p>
+        </div>
+      </div>
     </div>
+
+    <script src="popup.js"></script>
+    <script src="bg-loop.js"></script>
+    <script src="time.js"></script>
+    <script src="video-ads.js"></script>
   </body>
 </html>
