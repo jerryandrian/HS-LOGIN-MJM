@@ -29,6 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
             overlay.style.opacity = "1";
             document.body.style.overflow = "";
         }, 600);
-    }, 10000);
+    }, 20000);
 
 });
