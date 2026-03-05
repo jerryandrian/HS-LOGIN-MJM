@@ -268,28 +268,63 @@
 
       /* POPUP IFRAME */
 
-      @media (max-width: 480px) {
-        #promoBox {
-          width: 100%;
-          height: 80vh;
-          max-height: 90vh;
-          border-radius: 12px;
-        }
-
-        @media (max-width: 768px) {
-          #promoOverlay {
-            display: none !important;
-          }
-        }
+      .content-container {
+        transform: translateY(-1vh);
       }
 
       #promoClose {
-        font-size: 13px;
-        padding: 6px 10px;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s ease;
       }
 
-      .content-container {
-        transform: translateY(-1vh);
+      #promoClose:hover {
+        background: rgba(255, 0, 0, 0.7);
+      }
+
+      #promoPrev,
+      #promoNext {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: none;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 22px;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      #promoPrev:hover,
+      #promoNext:hover {
+        background: rgba(255, 255, 255, 0.4);
+      }
+
+      #promoPrev {
+        left: calc(50% - 450px);
+      }
+      #promoNext {
+        right: calc(50% - 450px);
       }
 
       #promoOverlay {
@@ -305,9 +340,9 @@
 
       #promoBox {
         width: 90vw;
-        max-width: 400px;
-        aspect-ratio: 1 / 1;
-        background: #ffffff;
+        max-width: 750px;
+        aspect-ratio: 16 / 9;
+        background: #000;
         border-radius: 16px;
         overflow: hidden;
         position: relative;
@@ -320,17 +355,45 @@
         position: relative;
       }
 
-      .slide {
+      .slide-group {
         position: absolute;
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        display: flex;
+        flex-direction: row;
         opacity: 0;
-        transition: opacity 0.6s ease;
+      }
+
+      .slide-group.active {
+        opacity: 1;
+      }
+
+      .slide {
+        flex: 1;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 80%;
       }
 
       .slide.active {
         opacity: 1;
+      }
+
+      .more-promo-btn {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 14px;
+        text-decoration: none;
+        letter-spacing: 1px;
+        font-family: "Poppins", sans-serif;
+        transition:
+          color 0.3s ease,
+          text-shadow 0.3s ease;
+      }
+
+      .more-promo-btn:hover {
+        color: #3498db;
+        /* text-shadow: 0 0 12px rgba(52, 152, 219, 0.8); */
+        text-decoration: underline;
       }
 
       @keyframes fadeInPopup {
@@ -342,30 +405,6 @@
           opacity: 1;
           transform: scale(1);
         }
-      }
-
-      #promoClose {
-        position: absolute;
-        bottom: 12px;
-        right: 12px;
-        background: #e85415;
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 8px;
-        cursor: not-allowed;
-        font-size: 14px;
-        opacity: 0.6;
-        transition: all 0.3s ease;
-      }
-
-      #promoClose.enable {
-        cursor: pointer;
-        opacity: 1;
-      }
-
-      #promoClose:hover {
-        background: #c0392b;
       }
 
       /* ================= SPLIT SCREEN ================= */
@@ -385,6 +424,7 @@
         justify-content: center;
         align-items: center;
         background: #0f1e32;
+        flex-direction: column;
       }
 
       /* RIGHT SIDE */
@@ -495,6 +535,20 @@
         }
       }
 
+      @media (max-width: 900px) {
+        #promoBox {
+          width: 85vw;
+          max-width: 320px;
+          aspect-ratio: 9 / 16;
+          border-radius: 12px;
+        }
+
+        #promoPrev,
+        #promoNext {
+          display: none !important;
+        }
+      }
+
       #videoAdOverlay {
         position: fixed;
         inset: 0;
@@ -537,19 +591,37 @@
     </style>
   </head>
   <body>
-    <!-- POPUP IKLAN 1:1 -->
+    <!-- POPUP IKLAN 16:9 -->
     <div id="promoOverlay">
       <div id="promoBox">
         <div class="slider">
-          <img
-            src="style/img/Wobbler promo februari-16.jpg (1).jpeg"
-            class="slide active"
-          />
-          <img
-            src="style/img/Wobbler promo februari-16.jpg (1).jpeg"
-            class="slide"
-          />
+          <!-- Batch 1 -->
+
+          <div class="slide-group">
+            <img src="style/img/promo1.webp" class="slide" />
+            <img src="style/img/promo2.webp" class="slide" />
+            <img src="style/img/promo3.webp" class="slide" />
+          </div>
+
+          <!-- Batch 2 -->
+          <div class="slide-group">
+            <img src="style/img/promo4.jpg.jpeg" class="slide" />
+            <img src="style/img/promo5.jpg.jpeg" class="slide" />
+            <img src="style/img/promo6.jpg.jpeg" class="slide" />
+          </div>
+
+          <!-- Batch 3 (more promo only) -->
+          <div class="slide-group slide-group-extra">
+            <img src="style/img/promo1.webp" class="slide" />
+            <img src="style/img/promo2.webp" class="slide" />
+            <img src="style/img/promo3.webp" class="slide" />
+          </div>
         </div>
+
+        <!-- Tombol navigasi & close (hidden by default) -->
+        <button id="promoPrev" style="display: none">‹</button>
+        <button id="promoNext" style="display: none">›</button>
+        <button id="promoClose" style="display: none">✕</button>
       </div>
     </div>
 
@@ -557,9 +629,7 @@
 
     <div id="videoAdOverlay">
       <div id="videoAdBox">
-        <video id="videoAd" autoplay muted playsinline>
-          <source src="style/img/video/video-promosi.mp4" type="video/mp4" />
-        </video>
+        <video id="videoAd" autoplay muted playsinline></video>
       </div>
     </div>
 
@@ -687,6 +757,11 @@
             </p>
           </div>
         </div>
+
+        <!-- More Promo di luar card -->
+        <p style="margin-top: 14px; text-align: center">
+          <a href="#" class="more-promo-btn"> More Promo </a>
+        </p>
       </div>
 
       <!-- RIGHT SIDE -->
@@ -698,9 +773,7 @@
           muted
           playsinline
           preload="auto"
-        >
-          <source src="style/img/video/video-promosi.mp4" />
-        </video>
+        ></video>
 
         <div id="videoFade"></div>
         <div class="hero-overlay"></div>
